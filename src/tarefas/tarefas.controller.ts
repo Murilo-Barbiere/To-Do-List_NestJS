@@ -9,6 +9,4 @@ export class TarefasController {
     getAll(){
         return this.tarefasService.listAll();
     }
-
-
 }
