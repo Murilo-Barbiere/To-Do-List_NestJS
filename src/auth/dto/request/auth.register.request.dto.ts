@@ -3,7 +3,7 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class AuthRegiterRequestDto {
   @IsString()
   @IsNotEmpty()
-  readonly nome!: string;
+  readonly name!: string;
 
   @IsEmail()
   @IsString()

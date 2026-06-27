@@ -12,7 +12,7 @@ export class UsersController {
 
     @Get(":id")
     retornaUserId(@Param("id") id: number, @Request() req: RequestWithUser): Promise<UserDto>{
-        return this.usersService.retornaUserId(id, req.user.id);
+        return this.usersService.retornaUserAuthId(id, req.user.id);
     }
 /*
     @Delete(":id")

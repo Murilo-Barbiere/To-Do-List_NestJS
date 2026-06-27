@@ -6,6 +6,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
+import { UsersService } from 'src/users/users.service';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AuthGuard } from './auth.guard';
   ],
   controllers: [AuthController],
   providers: [
+    UsersService,
     AuthService,
     {
       provide: APP_GUARD,

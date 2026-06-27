@@ -1,5 +1,5 @@
 export class AuthRegiterResponseDto {
   id!: number;
-  nome!: string;
+  name!: string;
   email!: string;
 }

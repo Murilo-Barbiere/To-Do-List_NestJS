@@ -8,42 +8,33 @@ import {
 
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthRegiterRequestDto } from './dto/request/auth.register.request.dto';
-import { AuthRegiterResponseDto } from './dto/response/auth.register.response.dto';
 import { AuthLoginRequestDto } from './dto/request/auth.login.request.dto';
 import { AuthLoginResponseDto } from './dto/response/auth.login.response.dto';
-import { user } from 'generated/prisma/browser';
+import { UsersService } from 'src/users/users.service';
+import { AuthRegiterResponseDto } from './dto/response/auth.register.response.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prismaService: PrismaService,
     private jwtService: JwtService,
+    private usersService: UsersService
   ) {}
 
   async register(
-    authRegiterRequestDto: AuthRegiterRequestDto,
+    authRegiterRequestDto: AuthRegiterRequestDto
   ): Promise<AuthRegiterResponseDto> {
     const userFlag = await this.prismaService.user.findUnique({
       where: {
         email: authRegiterRequestDto.email,
       },
     });
+
     if (userFlag) throw new ConflictException('Dados invalidos');
 
     const senhaHash = await bcrypt.hash(authRegiterRequestDto.senha, 10);
-    const user: user = await this.prismaService.user.create({
-      data: {
-        name: authRegiterRequestDto.nome,
-        email: authRegiterRequestDto.email,
-        senha: senhaHash,
-      },
-    });
-
-    return {
-      id: user.id,
-      nome: user.name,
-      email: user.email,
-    };
+    
+    return this.usersService.saveUser(authRegiterRequestDto, senhaHash)
   }
 
   async login(
