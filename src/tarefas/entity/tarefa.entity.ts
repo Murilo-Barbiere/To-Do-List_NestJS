@@ -5,7 +5,7 @@ export class TarefaEntity{
         public id: number,
         public titulo: string,
         public realizada: boolean,
-        public prioridadeTarefa: PrioridadeTarefa,
+        public prioridade: PrioridadeTarefa,
         public lista_id: number
     ){}
 }

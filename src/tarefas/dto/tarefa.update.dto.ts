@@ -1,4 +1,5 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PrioridadeTarefa } from 'generated/prisma/enums';
 
 export class TarefaUpdataDto {
     @IsString()
@@ -8,4 +9,8 @@ export class TarefaUpdataDto {
     @IsBoolean()
     @IsOptional()
     realizada!: boolean;
+
+    @IsEnum(PrioridadeTarefa, {message:"Valores permitidos: URGENTE, ALTA, MEDIA, BAIXA"})
+    @IsNotEmpty()
+    prioridadeTarefa!: PrioridadeTarefa;
 }

@@ -42,7 +42,11 @@ export class TarefaRepository implements ITarefaRepository {
     async update(id: number, data: TarefaUpdataDto): Promise<TarefaEntity> {
         const taref: tarefa = await this.prismaService.tarefa.update({
             where: { id },
-            data: data
+            data: {
+                titulo: data.titulo,
+                realizada: data.realizada,
+                prioridade: data.prioridadeTarefa,
+            }
         });
         return this.toEntity(taref);
     }

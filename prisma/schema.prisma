@@ -20,7 +20,6 @@ model user {
   name  String
   email String @unique
   senha String
-  prioridade PrioridadeTarefa
   tarefas lista_tarefa[]
 }
 
